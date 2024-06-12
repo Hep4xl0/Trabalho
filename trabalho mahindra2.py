@@ -1,9 +1,11 @@
 import math
-
-
-
+import os
 
 #CALCULOS MPG
+
+def clear(): #funcao para realizar o apagamento das informações anteriores, com objetivo de deixar mais limpa a nevagacao pelo menu
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def RecuperacaoEletricidade(DistanciaTotal):
     
     EnergiaRecuperavel_perKM = 0.2
@@ -40,20 +42,23 @@ def poluicao(DistanciaTotal):
 def custo_gas(DistanciaTotal):
     percorrer = DistanciaTotal * 10
     preco = percorrer * 5.85
-    return preco
+    return round(preco, 2)
 
 def custo_elec(DistanciaTotal):
     percorrer = DistanciaTotal * 0.2
     preco = percorrer * 0.656
-    return preco
+    return round(preco, 2)
 
-while True:
+def main():
     print('Bom dia, bem vindo ao comparador de carros de circuitos da formula-e e da formula 1, para iniciar por favor insira o tamanho do percurso onde sera realizada a comparação:')
-    tamanhoPista = float(input('Digite Tamanho da pista (em km) ex 2.933 km: \n>'))
-    print('Agora por favor insira a velocidade média dos carros:')
-    velocidade_media = float(input("Digite a velocidade média do corredor (em km/h) ex: 121.23 km/h:\n>"))  
-    print(f'dado a velocidade média de {velocidade_media} e o tamanho da pista de {tamanhoPista}, informaremos a diferenca de MPG (Milhas por galão) entre os carros, a diferença de emissão de gases poluentes e a diferença de custo em dinheiro dos para os carros poderem percorrer o percurso proposto:\n')
-
+    try:
+        tamanhoPista = float(input('Digite Tamanho da pista (em km) ex 2.933 km: \n>'))
+        velocidade_media = float(input("Digite a velocidade média do corredor (em km/h) ex: 121.23 km/h:\n>"))  
+    except ValueError:
+        print('Escolha inválida, Reinsira os valores númericos.')
+        return
+    
+    print(f'Dado a velocidade média de {velocidade_media} e o tamanho da pista de {tamanhoPista}, informaremos a diferenca de MPG (Milhas por galão) entre os carros, a diferença de emissão de gases poluentes e a diferença de custo em dinheiro dos para os carros poderem percorrer o percurso proposto:\n')
 
     TempoTotal_min = 45  
     tempo_hora = TempoTotal_min / 60
@@ -67,9 +72,30 @@ while True:
     mpgDiff = mpgElect - mpgGAS
     
     if mpgDiff > 0:
-        mpg_porcentagem = ((mpgGAS/mpg_eletrico) * 100) - 100
-        print(f'O MPG do carro eletrico é mais eficiente por {mpgDiff}, tornando o carro eletrico {mpg_porcentagem}% mais eficiente em gasto de energia\n')
+        mpg_porcentagem = ((mpgGAS / mpgElect) * 100)
+        print(f'O carro eletrico é mais eficiente por {mpgDiff} MPG, tornando o carro eletrico {mpg_porcentagem}% mais eficiente em gasto de energia\n')
     else: 
-        mpg_porcentagem = ((mpg_eletrico/mpgGAS) * 100) - 100
+        mpg_porcentagem = ((mpgElect / mpgGAS) * 100)
         print(f'O MPG do carro à Gás é mais eficiente por {mpgDiff}, tornando o carro à Gás {mpg_porcentagem}% mais eficiente em gasto de energia\n')
 
+    poluicao_gasolina = poluicao(DistanciaTotal)
+    print(f'A emissão de CO2 do carro de formula 1 é de {poluicao_gasolina:.2f} gramas. Por conta do carro da Formula-E ser eletrico ele nao emite gases poluentes\n')
+
+    preco_elect = custo_elec(DistanciaTotal)
+    preco_gas = custo_gas(DistanciaTotal)
+
+
+    print(f'O custo para o carro à gasolina percorrer {DistanciaTotal} km é de R$ {preco_gas}.')
+    print(f'O custo para o carro elétrico percorrer {DistanciaTotal} km é de R$ {preco_elect}.\n')
+
+    input('Pressione Enter para voltar ao menu')
+
+while True:
+    clear()
+    escolha = input('Deseja realizar a comparação entre um carro de Formula-E e um carro de Formula 1? (s/n): ').upper()
+    if escolha == 'S':
+        main()
+    elif escolha == 'N':
+        break
+    else:
+        print('Escolha inválida. Por favor, insira "s" para sim ou "n" para não.')
