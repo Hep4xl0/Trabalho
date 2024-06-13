@@ -1,7 +1,7 @@
 import math
 import os
 
-#CALCULOS MPG
+
 
 def clear(): #funcao para realizar o apagamento das informações anteriores, com objetivo de deixar mais limpa a nevagacao pelo menu
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -16,12 +16,12 @@ def RecuperacaoEletricidade(DistanciaTotal):
     
 
     return gastoTotal
-
+#CALCULOS MPG
 def mpg_eletrico(gastoTotal):
 
     CalcMPG = (33.7/gastoTotal) * 100
 
-    return CalcMPG
+    return round(CalcMPG)
 
 def mpg_gasolina(DistanciaTotal):
     
@@ -33,7 +33,7 @@ def mpg_gasolina(DistanciaTotal):
     
     mpg = conversaoMilhas/Consumo_em_mpg
     
-    return mpg
+    return round(mpg)
 
 def poluicao(DistanciaTotal):
     Co2Emitido_gramas = DistanciaTotal * 1500
@@ -72,11 +72,11 @@ def main():
     mpgDiff = mpgElect - mpgGAS
     
     if mpgDiff > 0:
-        mpg_porcentagem = ((mpgGAS / mpgElect) * 100)
-        print(f'O carro eletrico é mais eficiente por {mpgDiff} MPG, tornando o carro eletrico {mpg_porcentagem}% mais eficiente em gasto de energia\n')
+        mpg_porcentagem = round(((mpgGAS / mpgElect) * 100))
+        print(f'O carro eletrico é mais eficiente por {mpgDiff} MPG (metros por galão), tornando o carro eletrico {mpg_porcentagem}% mais eficiente em gasto de energia\n')
     else: 
         mpg_porcentagem = ((mpgElect / mpgGAS) * 100)
-        print(f'O MPG do carro à Gás é mais eficiente por {mpgDiff}, tornando o carro à Gás {mpg_porcentagem}% mais eficiente em gasto de energia\n')
+        print(f'O MPG (metros por galão) do carro à Gás é mais eficiente por {mpgDiff * (-1)}, tornando o carro à Gás {mpg_porcentagem}% mais eficiente em gasto de energia\n')
 
     poluicao_gasolina = poluicao(DistanciaTotal)
     print(f'A emissão de CO2 do carro de formula 1 é de {poluicao_gasolina:.2f} gramas. Por conta do carro da Formula-E ser eletrico ele nao emite gases poluentes\n')
