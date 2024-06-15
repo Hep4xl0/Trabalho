@@ -1,7 +1,7 @@
 import math
 import os
 
-#CALCULOS MPG
+
 
 def clear(): #funcão para realizar o apagamento das informações anteriores, com objetivo de deixar limpa a tela caso o usuario queira se manter no while reultilizando o programa
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -23,7 +23,7 @@ def mpg_eletrico(gastoTotal):
 
     CalcMPG = (33.7/gastoTotal) * 100
 
-    return CalcMPG
+    return round(CalcMPG)
 
 def mpg_gasolina(DistanciaTotal):
     
@@ -73,8 +73,8 @@ def main():
     
     mpgDiff = mpgElect - mpgGAS
     if mpgDiff > 0:
-        mpg_porcentagem = ((mpgGAS / mpgElect) * 100)
-        print(f'O carro eletrico é mais eficiente por {mpgDiff} MPG, tornando o carro eletrico {mpg_porcentagem}% mais eficiente em gasto de energia\n')
+        mpg_porcentagem = round(((mpgGAS / mpgElect) * 100))
+        print(f'O carro eletrico é mais eficiente por {mpgDiff} MPG (milhas por galão), tornando o carro eletrico {mpg_porcentagem}% mais eficiente em gasto de energia\n')
     else: 
         mpg_porcentagem = ((mpgElect / mpgGAS) * 100)
         print(f'O MPG do carro à Gás é mais eficiente por {mpgDiff * (-1)}, tornando o carro à Gás {mpg_porcentagem}% mais eficiente em gasto de energia\n')
