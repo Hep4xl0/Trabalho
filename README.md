@@ -1,3 +1,5 @@
+Henry Evideira Paulo (RM: 554985) Kaique Rodrigues Zaffarani (RM: 556677) Guilherme Santos Nunes (RM: 558989)
+
 Comparador de Carros de Fórmula-E e Fórmula 1
 Este programa compara a eficiência energética, emissão de gases poluentes e custo operacional de carros de Fórmula-E e Fórmula 1 em um percurso determinado, com proprosito de mostrar a eficiencia do carro eletrico quando comparado ao de gasolina, onde o eletrico demonstra uma melhor relação com meio ambiente, de custo energetico e dependo das distancias ele tambem possui uma melhor eficiencia energetico que é demonstrada pelo calculo de mpg
 
